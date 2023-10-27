@@ -1,0 +1,185 @@
+import pyautogui
+import pyperclip
+import time
+import subprocess
+
+pyautogui.PAUSE = 0.1
+
+
+def retomada():
+    with open("geral.txt", 'r') as file:
+        for line in file:
+            contrato = line.split('|')[0]
+            data = line.split('|')[1]
+            l_contrato = (225, 34)
+            l_normal = (215, 64)
+            l_preventivo = (287, 78)
+            l_locacao = (309, 99)
+            l_pre = (406, 126)
+            l_pre_cont = (551, 113)
+            l_retomada = (351, 219)
+            l_baixa_retomada = (1005, 331)
+            l_ficha = (1016, 288)
+            l_mapa = (79, 38)
+            l_mapa_jazigo = (114, 64)
+            l_concessionario = (1030, 311)
+            l_confirmar_retomada = (1017, 153)
+            l_gravar_retomada = (1002, 371)
+            l_gaveta = (409, 464)
+            l_confirmar_mapa = (1093, 176)
+            l_dados_mapa = (393, 362)
+            # abrir siac
+            open_siac_invoiced()
+            time.sleep(1)
+            # entrar no contrato e pegar informações
+            pyautogui.click(*l_contrato)
+            novo_contrato = int(contrato)
+            if novo_contrato < 1000000:
+                pyautogui.click(*l_normal)
+            elif novo_contrato < 2999999:
+                pyautogui.click(*l_locacao)
+            elif novo_contrato < 4999999:
+                pyautogui.click(*l_preventivo)
+            else:
+                pyautogui.click(*l_pre)
+
+            pyautogui.click(*l_pre_cont)
+            pyautogui.write(contrato)
+            pyautogui.press('enter')
+            pyautogui.press('enter')
+            pyautogui.press('enter')
+            pyautogui.hotkey('ctrl', 'c')
+            quadra = pyperclip.paste()
+            pyautogui.press('tab')
+            pyautogui.hotkey('ctrl', 'c')
+            setor = pyperclip.paste()
+            pyautogui.press('tab')
+            pyautogui.hotkey('ctrl', 'c')
+            jazigo = pyperclip.paste()
+            pyautogui.press('tab')
+            pyautogui.hotkey('ctrl', 'c')
+            complemento = pyperclip.paste()
+            pyautogui.click(*l_concessionario)
+            time.sleep(0.5)
+            pyautogui.hotkey('ctrl', 'c')
+            nome = pyperclip.paste()
+            pyautogui.press('esc')
+            pyautogui.press('esc')
+
+            # entra na retomada
+            pyautogui.click(*l_contrato)
+            pyautogui.click(*l_retomada)
+            pyautogui.write(contrato)
+            pyautogui.press('enter')
+            pyautogui.hotkey('ctrl', 'c')
+            data_venda = pyperclip.paste()
+            pyautogui.press('enter')
+            pyautogui.write('1')
+            pyautogui.press('enter')
+            # time.sleep(1)
+            pyautogui.press('enter')
+            pyautogui.write(data)
+            # pyautogui.press('enter')
+            pyautogui.write('JAZIGO RETOMADO')
+            pyautogui.press('enter')
+            pyautogui.write('999')
+            pyautogui.press('enter')
+            pyautogui.write('9999')
+            pyautogui.press('enter')
+            pyautogui.write('8888')
+            pyautogui.press('enter')
+            pyautogui.click(*l_confirmar_retomada)
+            pyautogui.press('enter')
+            pyautogui.click(*l_baixa_retomada)
+            pyautogui.press('s')
+            pyautogui.press('enter')
+            time.sleep(1)
+            pyautogui.click(*l_gravar_retomada)
+            time.sleep(1)
+            pyautogui.click(*l_ficha)
+            pyautogui.press('down')
+            pyautogui.press('enter')
+            time.sleep(1)
+            pyautogui.press('enter')
+            time.sleep(1)
+            pyautogui.press('enter')
+            time.sleep(1)
+            pyautogui.press('esc')
+
+            # mapa
+            pyautogui.click(*l_mapa)
+            pyautogui.click(*l_mapa_jazigo)
+            pyautogui.write(quadra)
+            pyautogui.press('enter')
+            pyautogui.write(setor)
+            pyautogui.press('enter')
+            pyautogui.write(jazigo)
+            pyautogui.press('enter')
+            pyautogui.write(complemento)
+            pyautogui.press('enter')
+            pyautogui.click(*l_dados_mapa)
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.click(*l_gaveta)
+            pyautogui.press('n')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('n')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('n')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('n')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('n')
+            pyautogui.press('enter')
+            pyautogui.press('del')
+            pyautogui.press('enter')
+            pyautogui.press('enter')
+            pyautogui.press('enter')
+            pyautogui.press('enter')
+            pyautogui.press('d')
+            pyautogui.click(l_confirmar_mapa)
+            pyautogui.write(data_venda)
+            pyautogui.press('tab')
+            pyautogui.write(nome)
+            pyautogui.press('tab')
+            pyautogui.write(data)
+            pyautogui.write('RETOMADO (JUDICIAL)')
+            pyautogui.press('tab')
+            pyautogui.write('JAZIGO RETOMADO')
+            pyautogui.click(*l_confirmar_mapa)
+            pyautogui.press('esc')
+            pyautogui.click(*l_contrato)
+
+
+def open_siac_invoiced():
+    # Caminho para o arquivo executável do aplicativo
+    trajectory_invoiced = r'C:\Program Files (x86)\SIAC - Sist. Integrado Adm. Cemitério\UUMNUMBRCE02X.exe'
+    try:
+        # Abre o aplicativo usando os caminho especificado
+        subprocess.Popen(trajectory_invoiced)
+    except FileNotFoundError:
+        print("O arquivo do siac não foi encontrado.")
+    except Exception as e:
+        print(f"Ocorreu um erro ao abrir o siac: {e}")
+
+
+if __name__ == "__main__":
+    retomada()
