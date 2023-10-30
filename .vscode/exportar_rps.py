@@ -2,23 +2,27 @@ import pyautogui
 import time
 import subprocess
 
-pyautogui.PAUSE = 0.3
+pyautogui.PAUSE = 0.1
 
 
 def export():
-    open_siac_invoiced
-    open_banking_movement
+    open_siac_receive()
+    time.sleep(1)
+    open_banking_movement()
+    time.sleep(1)
     with open("geral.txt", "r") as file:
         for line in file:
             rps = line.split('|')[1]
-            siac = (95, 220)
-            confirmar = (1059, 129)
-            movimentar = (1104, 440)
+            l_rps = (359, 129)
+            l_confirmar = (1056, 129)
+            l_movimentar = (1076, 436)
+            l_banco = (364, 533)
+            l_servico = (283, 212)
+            l_contrato = (708, 130)
             pyautogui.write(rps)
             pyautogui.press('enter')
-            pyautogui.click(*siac)
             time.sleep(0.5)
-            pyautogui.click(172, 540)
+            pyautogui.click(*l_banco)
             pyautogui.press("0")
             pyautogui.press("2")
             pyautogui.press("2")
@@ -31,23 +35,26 @@ def export():
             pyautogui.press("0")
             pyautogui.press("3")
             pyautogui.press("enter")
-            pyautogui.click(*confirmar)
+            pyautogui.click(*l_confirmar)
             pyautogui.press('enter')
-            pyautogui.click(*movimentar)
+            pyautogui.click(*l_movimentar)
             pyautogui.press('enter')
             time.sleep(1.5)
-        
+            pyautogui.click(*l_servico)
+            pyautogui.click(*l_contrato)
+            pyautogui.click(*l_rps)
+
 
 def open_banking_movement():
-    location_movimentacao = (108, 31)
-    location_sub_movimentacao = (116, 54)
-    pyautogui.click(*location_movimentacao)
-    pyautogui.click(*location_sub_movimentacao)
+    l_especiais = (599, 32)
+    l_rps = (645, 100)
+    pyautogui.click(*l_especiais)
+    pyautogui.click(*l_rps)
 
 
-def open_siac_invoiced():
+def open_siac_receive():
     # Caminho para o arquivo executável do aplicativo
-    trajectory_invoiced = r'C:\Program Files (x86)\SIAC - Sist. Integrado Adm. Cemitério\UUMNUMBRCE07.exe'
+    trajectory_invoiced = r'C:\Program Files (x86)\SIAC - Sist. Integrado Adm. Cemitério\UUMNUMBRCE01.exe'
 
     try:
         # Abre o aplicativo usando o caminho especificado
