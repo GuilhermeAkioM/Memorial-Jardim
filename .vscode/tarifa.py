@@ -2,7 +2,7 @@ import pyautogui
 import time
 import subprocess
 
-pyautogui.PAUSE = 1
+pyautogui.PAUSE = 0.3
 
 
 def tax():

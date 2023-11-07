@@ -134,11 +134,6 @@ def gerar_rps():
                 pyautogui.press('enter')
 
             elif int(condicao) == 3:
-                pyautogui.press('g')
-                pyautogui.press('enter')
-                pyautogui.press('enter')
-                pyautogui.write('22')
-                pyautogui.press('enter')
                 pyautogui.write('{}{}{}'.format(v_dia, v_mes, v_ano))
                 pyautogui.press('enter')
                 pyautogui.press('enter')
